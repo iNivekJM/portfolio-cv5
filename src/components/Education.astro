@@ -1,0 +1,67 @@
+---
+export interface Props {
+  education: Record<string, any>[];
+  t: Record<string, any>;
+}
+
+const { education, t } = Astro.props;
+---
+
+<section id="education" class="py-20 bg-gray-50 dark:bg-dark-surface transition-colors duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <h2 class="section-title">
+        {t.education.title}
+      </h2>
+      <div class="w-20 h-1 bg-gradient-to-r from-primary-600 to-primary-400 mx-auto rounded-full"></div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {education.map((edu, index) => (
+        <div
+          class="card group reveal hover:scale-105"
+          style={`transition-delay: ${index * 100}ms`}
+        >
+          <div class="flex items-start justify-between mb-4">
+            <span class="text-5xl transform group-hover:scale-110 transition-transform duration-300">{edu.icon}</span>
+            <span class={`px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${
+              edu.type === 'education'
+                ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400 group-hover:bg-blue-500/20'
+                : edu.type === 'certification'
+                ? 'bg-green-500/10 text-green-600 dark:text-green-400 group-hover:bg-green-500/20'
+                : 'bg-purple-500/10 text-purple-600 dark:text-purple-400 group-hover:bg-purple-500/20'
+            }`}>
+              {edu.type === 'education' ? '🎓' : edu.type === 'certification' ? '📜' : '🚀'}
+            </span>
+          </div>
+
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+            {edu.title}
+          </h3>
+          <p class="text-primary-600 dark:text-primary-400 font-medium text-sm mb-2">
+            {edu.institution}
+          </p>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+            {edu.subtitle}
+          </p>
+
+          <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-500">
+            <div class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              {edu.location}
+            </div>
+            <div class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              {edu.date}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Education from '../components/Education.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+
+import { data, translations } from '../utils/i18n';
+
+const locale = 'es';
+const t = translations[locale];
+const content = data[locale];
+
+const pageTitle = `${content.profile.name} - ${content.profile.title}`;
+const pageDescription = content.profile.bio;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  locale={locale}
+>
+  <Header locale={locale} t={t} />
+
+  <main>
+    <Hero profile={content.profile} t={t} />
+    <About profile={content.profile} t={t} />
+    <Experience experience={content.experience} t={t} />
+    <Education education={content.education} t={t} />
+    <Skills skills={content.skills} t={t} />
+    <Projects projects={content.projects} t={t} />
+    <Contact profile={content.profile} t={t} />
+  </main>
+
+  <Footer locale={locale} t={t} />
+</BaseLayout>
